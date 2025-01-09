@@ -17,6 +17,7 @@ const Pagination = ({fetchData, nPage, indexOfFirstItem, indexOfLastItem, curren
 
     const changePage = (pageNum) => {
         setCurrentPage(pageNum)
+        localStorage.setItem("currentPage", pageNum);
     }
 
 

@@ -7,20 +7,18 @@ const DetailsPage = () => {
   const { name } = useParams();
   const { fetchData: info, loading, errorMsg } = useFetchApi(`https://pokeapi.co/api/v2/pokemon/${name}`, null);
 
-  const [existingFavorites, setExistingFavorites] = useState([]);
+  const storedFavorites = localStorage.getItem('favouritePoke');
+  const [existingFavorites, setExistingFavorites] = useState(storedFavorites ? JSON.parse(storedFavorites) : []);
 
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favouritePoke')) || [];
-    setExistingFavorites(storedFavorites);
-  }, []);
 
   const addToFavouritePage = () => {
-    const isAlreadyFavorited = existingFavorites.some((poke) => poke.name === info.name);
+
+    const isAlreadyFavorited = existingFavorites.filter((poke) => poke.name === info.name);
+
     if (isAlreadyFavorited) {
       toast.info('Pokémon is already in Favorites!', { position: 'top-right' });
       return;
     }
-
 
     const updatedFavorites = [...existingFavorites, info];
     

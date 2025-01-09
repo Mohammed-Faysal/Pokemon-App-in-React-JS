@@ -26,7 +26,7 @@ const Home = () => {
     const handleNavigate = (name) => {
         navigate(`/details/${name}?page=${currentPage}`);
     };
-    
+
 
     return (
         <div className='mt-32'>
